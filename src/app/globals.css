@@ -1,0 +1,199 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  /* ── Brand Colors ── */
+  --color-brand-red: #C52023;
+  --color-brand-dark-red: #BE312C;
+  --color-brand-heading: #161922;
+  --color-brand-footer-bg: #2C2C2C;
+  --color-brand-grey-section: #ECECEC;
+  --color-brand-grey-bar: #7E7E7E;
+
+  /* ── shadcn/ui CSS Variable Mappings ── */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: "Montserrat", sans-serif;
+  --font-mono: var(--font-geist-mono);
+  --font-heading: "Montserrat", sans-serif;
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  /* ── Primary mapped to Brand Red #C52023 ── */
+  --primary: #C52023;
+  --primary-foreground: #FFFFFF;
+
+  /* ── Secondary mapped to Brand Grey Section ── */
+  --secondary: #ECECEC;
+  --secondary-foreground: #161922;
+
+  /* ── Background & Foreground ── */
+  --background: #FFFFFF;
+  --foreground: #161922;
+
+  /* ── Card ── */
+  --card: #FFFFFF;
+  --card-foreground: #161922;
+
+  /* ── Popover ── */
+  --popover: #FFFFFF;
+  --popover-foreground: #161922;
+
+  /* ── Muted ── */
+  --muted: #ECECEC;
+  --muted-foreground: #7E7E7E;
+
+  /* ── Accent mapped to Dark Red CTA ── */
+  --accent: #BE312C;
+  --accent-foreground: #FFFFFF;
+
+  /* ── Destructive ── */
+  --destructive: #C52023;
+
+  /* ── Borders & Input ── */
+  --border: #E0E0E0;
+  --input: #E0E0E0;
+  --ring: #C52023;
+
+  /* ── Chart Colors ── */
+  --chart-1: #C52023;
+  --chart-2: #BE312C;
+  --chart-3: #161922;
+  --chart-4: #7E7E7E;
+  --chart-5: #ECECEC;
+
+  /* ── Radius ── */
+  --radius: 0.5rem;
+
+  /* ── Sidebar ── */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #161922;
+  --sidebar-primary: #C52023;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #ECECEC;
+  --sidebar-accent-foreground: #161922;
+  --sidebar-border: #E0E0E0;
+  --sidebar-ring: #C52023;
+}
+
+.dark {
+  --primary: #E06060;
+  --primary-foreground: #FFFFFF;
+  --secondary: #2C2C2C;
+  --secondary-foreground: #F0F0F0;
+  --background: #161922;
+  --foreground: #F0F0F0;
+  --card: #1E2030;
+  --card-foreground: #F0F0F0;
+  --popover: #1E2030;
+  --popover-foreground: #F0F0F0;
+  --muted: #2C2C2C;
+  --muted-foreground: #A0A0A0;
+  --accent: #BE312C;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E06060;
+  --border: #3A3A3A;
+  --input: #3A3A3A;
+  --ring: #C52023;
+  --chart-1: #C52023;
+  --chart-2: #BE312C;
+  --chart-3: #F0F0F0;
+  --chart-4: #7E7E7E;
+  --chart-5: #2C2C2C;
+  --sidebar: #1E2030;
+  --sidebar-foreground: #F0F0F0;
+  --sidebar-primary: #C52023;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #2C2C2C;
+  --sidebar-accent-foreground: #F0F0F0;
+  --sidebar-border: #3A3A3A;
+  --sidebar-ring: #C52023;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Montserrat", sans-serif;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ── Custom Scrollbar Styling ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--brand-grey-bar);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-heading);
+}
+
+/* ── Custom Utility Classes ── */
+.heading-color {
+  color: var(--brand-heading);
+}
+
+.footer-bg {
+  background-color: var(--brand-footer-bg);
+}
+
+.grey-section {
+  background-color: var(--brand-grey-section);
+}
+
+.grey-bar {
+  background-color: var(--brand-grey-bar);
+}

@@ -1,0 +1,8 @@
+# Robots.txt for robustponds.shop
+# Allow all crawlers to index the site
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://robustponds.shop/sitemap.xml
