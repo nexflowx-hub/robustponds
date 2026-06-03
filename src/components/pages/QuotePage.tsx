@@ -65,7 +65,7 @@ export function QuotePage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON({
+        body: JSON.stringify({
           ...formData,
           quantity: quantity,
           subject: `Pedido de Orçamento - ${formData.product || 'Geral'}`,

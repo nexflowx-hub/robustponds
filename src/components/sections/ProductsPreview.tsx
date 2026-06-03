@@ -104,7 +104,7 @@ export default function ProductsPreview() {
 
               {/* Link */}
               <button
-                onClick={() => navigate('produtos-categoria', card.slug)}
+                onClick={() => navigate('produtos')}
                 className="inline-flex items-center gap-1 text-sm font-semibold transition-colors"
                 style={{ color: BRAND_RED }}
                 onMouseEnter={(e) =>

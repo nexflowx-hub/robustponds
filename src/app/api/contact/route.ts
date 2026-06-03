@@ -67,8 +67,8 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      success: true,
       ...result,
+      success: true,
     });
   } catch (error) {
     console.error("[API /contact] Error:", error);

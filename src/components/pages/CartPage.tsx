@@ -32,9 +32,9 @@ function formatPrice(priceEur: number): string {
 
 export function CartPage() {
   const { navigate } = useNavigationStore();
-  const { items, removeItem, updateQuantity, subtotal, clearCart } = useCartStore();
+  const { items, removeItem, updateQuantity, totalPrice, clearCart } = useCartStore();
 
-  const total = subtotal();
+  const total = totalPrice();
 
   if (items.length === 0) {
     return (

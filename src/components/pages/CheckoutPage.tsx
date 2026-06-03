@@ -88,12 +88,12 @@ type CheckoutFormValues = z.infer<typeof checkoutSchema>;
 
 export function CheckoutPage() {
   const { navigate } = useNavigationStore();
-  const { items, subtotal } = useCartStore();
+  const { items, totalPrice } = useCartStore();
   const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>('card');
   const [submitting, setSubmitting] = useState(false);
   const [checkoutResult, setCheckoutResult] = useState<CheckoutResponse | null>(null);
 
-  const total = subtotal();
+  const total = totalPrice();
 
   const {
     register,
@@ -199,7 +199,7 @@ export function CheckoutPage() {
 
           {/* Action-specific details */}
           <div className="w-full space-y-4 text-left">
-            {checkoutResult.actionType === 'redirect' && checkoutResult.actionData.url && (
+            {checkoutResult.actionType === 'redirect' && checkoutResult.payload.url && (
               <div className="rounded-lg border bg-muted/50 p-4">
                 <h3 className="mb-2 text-sm font-semibold">Pagamento por Cartão</h3>
                 <p className="text-sm text-muted-foreground">
@@ -207,7 +207,7 @@ export function CheckoutPage() {
                 </p>
                 <Button
                   className="mt-3 w-full"
-                  onClick={() => window.open(checkoutResult.actionData.url, '_blank')}
+                  onClick={() => window.open(checkoutResult.payload.url, '_blank')}
                 >
                   <ExternalLink />
                   Ir para Pagamento Seguro
@@ -221,11 +221,11 @@ export function CheckoutPage() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Entidade:</span>
-                    <span className="font-mono font-semibold">{checkoutResult.actionData.entity || '—'}</span>
+                    <span className="font-mono font-semibold">{checkoutResult.payload.entity || '—'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Referência:</span>
-                    <span className="font-mono font-semibold">{checkoutResult.actionData.reference || '—'}</span>
+                    <span className="font-mono font-semibold">{checkoutResult.payload.reference || '—'}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Montante:</span>
@@ -238,7 +238,7 @@ export function CheckoutPage() {
               </div>
             )}
 
-            {checkoutResult.actionType === 'qr_code' && checkoutResult.actionData.qr_code && (
+            {checkoutResult.actionType === 'qr_code' && checkoutResult.payload.qr_code && (
               <div className="rounded-lg border bg-muted/50 p-4">
                 <h3 className="mb-2 text-sm font-semibold">MB WAY</h3>
                 <p className="text-sm text-muted-foreground">
@@ -247,15 +247,15 @@ export function CheckoutPage() {
                 <div className="mt-3 flex items-center justify-center rounded-lg bg-white p-4 dark:bg-card">
                   <QrCode className="size-32 text-foreground" />
                 </div>
-                {checkoutResult.actionData.transaction_id && (
+                {checkoutResult.payload.transaction_id && (
                   <p className="mt-2 text-center text-xs text-muted-foreground">
-                    ID Transação: {checkoutResult.actionData.transaction_id}
+                    ID Transação: {checkoutResult.payload.transaction_id}
                   </p>
                 )}
               </div>
             )}
 
-            {checkoutResult.actionType === 'address' && checkoutResult.actionData.address && (
+            {checkoutResult.actionType === 'address' && checkoutResult.payload.address && (
               <div className="rounded-lg border bg-muted/50 p-4">
                 <h3 className="mb-2 text-sm font-semibold">Pagamento Cripto</h3>
                 <p className="text-sm text-muted-foreground">
@@ -263,22 +263,22 @@ export function CheckoutPage() {
                 </p>
                 <div className="mt-3 flex items-center gap-2 rounded-lg bg-background p-3">
                   <code className="flex-1 break-all text-xs font-mono">
-                    {checkoutResult.actionData.address}
+                    {checkoutResult.payload.address}
                   </code>
                   <Button
                     variant="ghost"
                     size="icon-sm"
                     onClick={() => {
-                      navigator.clipboard.writeText(checkoutResult.actionData.address);
+                      navigator.clipboard.writeText(checkoutResult.payload.address ?? '');
                       toast.success('Morada copiada!');
                     }}
                   >
                     <Copy className="size-4" />
                   </Button>
                 </div>
-                {checkoutResult.actionData.network && (
+                {checkoutResult.payload.network && (
                   <p className="mt-1 text-xs text-muted-foreground">
-                    Rede: {checkoutResult.actionData.network}
+                    Rede: {checkoutResult.payload.network}
                   </p>
                 )}
                 <p className="mt-2 text-xs text-muted-foreground">

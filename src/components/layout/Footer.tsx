@@ -56,13 +56,13 @@ export default function Footer() {
               Produtos
             </h4>
             <ul className="flex flex-col gap-2.5">
-              {CATEGORIES.map((cat) => (
-                <li key={cat.id}>
+              {CATEGORIES.filter((c) => c !== 'All').map((cat) => (
+                <li key={cat}>
                   <button
-                    onClick={() => navigate('produtos-categoria', cat.slug)}
+                    onClick={() => navigate('produtos')}
                     className="text-sm text-gray-400 hover:text-white hover:pl-1 transition-all duration-200"
                   >
-                    {cat.name}
+                    {cat}
                   </button>
                 </li>
               ))}

@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
 
     const { method, customer, items } = body as {
       method?: string;
-      customer?: { email?: string; nif?: string; birthDate?: string };
+      customer?: { email?: string; name?: string; nif?: string; birthDate?: string };
       items?: { productId: string; name: string; quantity: number; unitPrice: number }[];
     };
 
@@ -62,6 +62,7 @@ export async function POST(request: NextRequest) {
       amount: roundedAmount,
       customer: {
         email: customer.email,
+        name: customer.name ?? "",
         nif: customer.nif,
         birthDate: customer.birthDate,
       },

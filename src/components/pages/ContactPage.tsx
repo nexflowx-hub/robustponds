@@ -51,7 +51,7 @@ export function ContactPage() {
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON(formData),
+        body: JSON.stringify(formData),
       });
       if (res.ok) {
         setSent(true);

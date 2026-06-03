@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { useNavigationStore } from '@/store/navigation'
 import { useCartStore } from '@/store/cart';
 import { CATEGORIES } from '@/types';
+import type { PageView } from '@/types';
 import {
   Phone,
   Mail,
@@ -24,7 +25,7 @@ import { Badge } from '@/components/ui/badge';
 const BRAND_RED = '#C52023';
 
 const NAV_LINKS = [
-  { label: 'Início', page: 'inicio' as const },
+  { label: 'Início', page: 'home' as const },
   { label: 'Produtos', page: 'produtos' as const, hasDropdown: true },
   { label: 'Contactos', page: 'contactos' as const },
 ];
@@ -69,19 +70,19 @@ export default function Navbar() {
     dropdownTimeout.current = setTimeout(() => setProductsOpen(false), 200);
   };
 
-  const handleNavClick = (page: string) => {
-    navigate(page as 'inicio' | 'produtos' | 'contactos');
+  const handleNavClick = (page: PageView) => {
+    navigate(page);
     setMobileOpen(false);
   };
 
-  const handleCategoryClick = (slug: string) => {
-    navigate('produtos-categoria', slug);
+  const handleCategoryClick = () => {
+    navigate('produtos');
     setMobileOpen(false);
   };
 
   const isActive = (page: string) => currentPage === page;
 
-  const filteredCategories = CATEGORIES.filter((c) => c.slug !== 'all');
+  const filteredCategories = CATEGORIES.filter((c) => c !== 'All');
 
   return (
     <header className="w-full">
@@ -161,11 +162,11 @@ export default function Navbar() {
                       <div className="bg-white rounded-xl shadow-lg border border-gray-100 py-2 animate-in fade-in slide-in-from-top-1 duration-150">
                         {filteredCategories.map((cat) => (
                           <button
-                            key={cat.id}
-                            onClick={() => handleCategoryClick(cat.slug)}
+                            key={cat}
+                            onClick={() => handleCategoryClick()}
                             className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#C52023] transition-colors"
                           >
-                            {cat.name}
+                            {cat}
                           </button>
                         ))}
                       </div>
@@ -209,11 +210,11 @@ export default function Navbar() {
             {/* Mobile menu trigger */}
             <div className="lg:hidden">
               <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
-                <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon">
-                    <Menu className="size-6" />
-                    <span className="sr-only">Menu</span>
-                  </Button>
+                <SheetTrigger
+                  render={<Button variant="ghost" size="icon" />}
+                >
+                  <Menu className="size-6" />
+                  <span className="sr-only">Menu</span>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-80 max-w-[85vw] p-0 overflow-y-auto">
                   {/* Mobile header */}
@@ -264,11 +265,11 @@ export default function Navbar() {
                       <div className="pl-4 flex flex-col gap-0.5 mt-1 mb-2">
                         {filteredCategories.map((cat) => (
                           <button
-                            key={cat.id}
-                            onClick={() => handleCategoryClick(cat.slug)}
+                            key={cat}
+                            onClick={() => handleCategoryClick()}
                             className="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:text-[#C52023] hover:bg-gray-50 rounded-lg transition-colors"
                           >
-                            {cat.name}
+                            {cat}
                           </button>
                         ))}
                       </div>

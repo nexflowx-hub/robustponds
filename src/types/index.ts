@@ -1,4 +1,11 @@
 // ── Product Types ──
+export interface HeroSlide {
+  id: number;
+  title: string;
+  subtitle: string;
+  image: string;
+}
+
 export interface Product {
   id: string;
   name: string;
@@ -11,6 +18,8 @@ export interface Product {
   sku?: string;
   stock?: number;
   featured?: boolean;
+  ref?: string;
+  specs?: Record<string, string>;
 }
 
 // ── Cart Types ──
@@ -59,6 +68,7 @@ export interface CheckoutPayload {
     nif?: string;       // Obrigatório para crypto (KYC)
     birthDate?: string;  // Obrigatório para crypto (AML) - format date
   };
+  items?: { productId: string; name: string; quantity: number; unitPrice: number }[];
 }
 
 export interface CheckoutResponse {
@@ -68,8 +78,11 @@ export interface CheckoutResponse {
     entity?: string;     // Multibanco
     reference?: string;  // Multibanco
     redirect?: string;
+    url?: string;        // Card redirect
     qr_code?: string;
     address?: string;
+    transaction_id?: string;  // MB WAY / Crypto
+    network?: string;         // Crypto
   };
   message?: string;
 }

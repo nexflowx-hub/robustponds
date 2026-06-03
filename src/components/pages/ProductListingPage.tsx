@@ -42,25 +42,25 @@ import { toast } from 'sonner';
 
 // ── Fallback Products ──
 const FALLBACK_PRODUCTS: Product[] = [
-  { id: 'fp-1', name: 'Porta Frigorífica KS 100-1', category: 'Portas', sku: 'BS-KS100-1', priceEur: 289.90, stock: 15, ref: 'REF001', specs: { potência: '1 CV', 'caudal máx.': '100 L/min', 'altura máx.': '10 m' } },
-  { id: 'fp-2', name: 'Porta Frigorífica KS 200-2', category: 'Portas', sku: 'BS-KS200-2', priceEur: 449.00, stock: 8, ref: 'REF002', specs: { potência: '2 CV', 'caudal máx.': '200 L/min', 'altura máx.': '15 m' } },
-  { id: 'fp-3', name: 'Porta Frigorífica Industrial IP 55', category: 'Portas', sku: 'BS-IP55', priceEur: 0, ref: 'REF003', specs: { potência: '5 CV', 'caudal máx.': '500 L/min', 'altura máx.': '25 m' } },
-  { id: 'fp-4', name: 'Complemento Industrial Centrífuga JP 50', category: 'Complementos', sku: 'BP-JP50', priceEur: 179.90, stock: 20, ref: 'REF004', specs: { potência: '0.75 CV', 'caudal máx.': '50 L/min', 'altura máx.': '8 m' } },
-  { id: 'fp-5', name: 'Complemento Industrial Autoaspirante AS 80', category: 'Complementos', sku: 'BP-AS80', priceEur: 259.00, stock: 12, ref: 'REF005', specs: { potência: '1 CV', 'caudal máx.': '80 L/min', 'altura máx.': '12 m' } },
-  { id: 'fp-6', name: 'Complemento Industrial Multi-Etapa ME 100', category: 'Complementos', sku: 'BP-ME100', priceEur: 0, ref: 'REF006', specs: { potência: '1.5 CV', 'caudal máx.': '100 L/min', 'altura máx.': '20 m' } },
-  { id: 'fp-7', name: 'Grupo Pressurizador GP 60-24', category: 'Cortina de Lamelas', sku: 'SP-GP6024', priceEur: 899.00, stock: 5, ref: 'REF007', specs: { potência: '2 CV', 'vaso expansão': '24 L', pressão: '2-6 bar' } },
-  { id: 'fp-8', name: 'Cortina de Lamelas Residencial RP 200', category: 'Cortina de Lamelas', sku: 'SP-RP200', priceEur: 1250.00, stock: 3, ref: 'REF008', specs: { potência: '3 CV', 'vaso expansão': '60 L', pressão: '2-8 bar' } },
-  { id: 'fp-9', name: 'Cortina de Lamelas Comercial CP 500', category: 'Cortina de Lamelas', sku: 'SP-CP500', priceEur: 0, ref: 'REF009', specs: { potência: '7.5 CV', 'vaso expansão': '200 L', pressão: '3-10 bar' } },
-  { id: 'fp-10', name: 'Filtro de Areia FA 600', category: 'Painel', sku: 'FT-FA600', priceEur: 129.00, stock: 25, ref: 'REF010', specs: { capacidade: '600 L', 'diâmetro': '500 mm', material: 'Polipropileno' } },
-  { id: 'fp-11', name: 'Filtro Magnético FM 100', category: 'Painel', sku: 'FT-FM100', priceEur: 89.90, stock: 30, ref: 'REF011', specs: { 'diâmetro conexão': '1"', material: 'Latão niquelado' } },
-  { id: 'fp-12', name: 'Câmara de Decantação CD 2000', category: 'Painel', sku: 'FT-CD2000', priceEur: 0, ref: 'REF012', specs: { capacidade: '2000 L', material: 'PEAD' } },
-  { id: 'fp-13', name: 'Tubo PVC 110mm (3 metros)', category: 'Proteção', sku: 'AC-PVC110', priceEur: 12.90, stock: 100, ref: 'REF013', specs: { diâmetro: '110 mm', comprimento: '3 m', material: 'PVC' } },
-  { id: 'fp-14', name: 'Kit Uniões Flexíveis KUF 6pcs', category: 'Proteção', sku: 'AC-KUF6', priceEur: 24.90, stock: 50, ref: 'REF014', specs: { quantidade: '6 peças', 'diâmetro': '1" 1/4' } },
-  { id: 'fp-15', name: 'Cabo Elétrico Submersível 50m', category: 'Proteção', sku: 'AC-CES50', priceEur: 0, ref: 'REF015', specs: { comprimento: '50 m', secção: '3x2.5 mm²' } },
-  { id: 'fp-16', name: 'Kit Solar porta KS-SOLAR 300', category: 'Revestimentos Higiénicos', sku: 'SS-KSSOL300', priceEur: 2190.00, stock: 2, ref: 'REF016', specs: { 'potência painel': '300 W', 'caudal máx.': '120 L/min', 'altura máx.': '30 m' } },
-  { id: 'fp-17', name: 'Porta Seccionada para portas ISB 1000', category: 'Revestimentos Higiénicos', sku: 'SS-ISB1000', priceEur: 0, ref: 'REF017', specs: { potência: '1.1 kW', 'tensão entrada': '100-500 V DC' } },
-  { id: 'fp-18', name: 'porta de Porta Rápida ECO 1.5 CV', category: 'Portas', sku: 'PC-ECO15', priceEur: 349.00, stock: 10, ref: 'REF018', specs: { potência: '1.5 CV', 'caudal máx.': '160 L/min', compatível: 'Água salgada' } },
-  { id: 'fp-19', name: 'Filtro de Porta Rápida FP 800', category: 'Portas', sku: 'PC-FP800', priceEur: 0, ref: 'REF019', specs: { capacidade: '800 L', 'diâmetro': '600 mm' } },
+  { id: 'fp-1', name: 'Porta Frigorífica KS 100-1', slug: 'porta-frigorifica-ks-100-1', description: 'Porta frigorífica de alto rendimento.', images: [], category: 'Portas', sku: 'BS-KS100-1', priceEur: 289.90, stock: 15, ref: 'REF001', specs: { potência: '1 CV', 'caudal máx.': '100 L/min', 'altura máx.': '10 m' } },
+  { id: 'fp-2', name: 'Porta Frigorífica KS 200-2', slug: 'porta-frigorifica-ks-200-2', description: 'Porta frigorífica industrial modelo 200.', images: [], category: 'Portas', sku: 'BS-KS200-2', priceEur: 449.00, stock: 8, ref: 'REF002', specs: { potência: '2 CV', 'caudal máx.': '200 L/min', 'altura máx.': '15 m' } },
+  { id: 'fp-3', name: 'Porta Frigorífica Industrial IP 55', slug: 'porta-frigorifica-industrial-ip-55', description: 'Porta frigorífica industrial IP 55.', images: [], category: 'Portas', sku: 'BS-IP55', priceEur: 0, ref: 'REF003', specs: { potência: '5 CV', 'caudal máx.': '500 L/min', 'altura máx.': '25 m' } },
+  { id: 'fp-4', name: 'Complemento Industrial Centrífuga JP 50', slug: 'complemento-industrial-centrifuga-jp-50', description: 'Complemento centrífugo para câmaras frias.', images: [], category: 'Complementos', sku: 'BP-JP50', priceEur: 179.90, stock: 20, ref: 'REF004', specs: { potência: '0.75 CV', 'caudal máx.': '50 L/min', 'altura máx.': '8 m' } },
+  { id: 'fp-5', name: 'Complemento Industrial Autoaspirante AS 80', slug: 'complemento-industrial-autoaspirante-as-80', description: 'Complemento autoaspirante industrial.', images: [], category: 'Complementos', sku: 'BP-AS80', priceEur: 259.00, stock: 12, ref: 'REF005', specs: { potência: '1 CV', 'caudal máx.': '80 L/min', 'altura máx.': '12 m' } },
+  { id: 'fp-6', name: 'Complemento Industrial Multi-Etapa ME 100', slug: 'complemento-industrial-multi-etapa-me-100', description: 'Complemento multi-etapa para pressão elevada.', images: [], category: 'Complementos', sku: 'BP-ME100', priceEur: 0, ref: 'REF006', specs: { potência: '1.5 CV', 'caudal máx.': '100 L/min', 'altura máx.': '20 m' } },
+  { id: 'fp-7', name: 'Grupo Pressurizador GP 60-24', slug: 'grupo-pressurizador-gp-60-24', description: 'Grupo pressurizador compacto.', images: [], category: 'Cortina de Lamelas', sku: 'SP-GP6024', priceEur: 899.00, stock: 5, ref: 'REF007', specs: { potência: '2 CV', 'vaso expansão': '24 L', pressão: '2-6 bar' } },
+  { id: 'fp-8', name: 'Cortina de Lamelas Residencial RP 200', slug: 'cortina-lamelas-residencial-rp-200', description: 'Cortina de lamelas para uso residencial.', images: [], category: 'Cortina de Lamelas', sku: 'SP-RP200', priceEur: 1250.00, stock: 3, ref: 'REF008', specs: { potência: '3 CV', 'vaso expansão': '60 L', pressão: '2-8 bar' } },
+  { id: 'fp-9', name: 'Cortina de Lamelas Comercial CP 500', slug: 'cortina-lamelas-comercial-cp-500', description: 'Cortina de lamelas para uso comercial.', images: [], category: 'Cortina de Lamelas', sku: 'SP-CP500', priceEur: 0, ref: 'REF009', specs: { potência: '7.5 CV', 'vaso expansão': '200 L', pressão: '3-10 bar' } },
+  { id: 'fp-10', name: 'Filtro de Areia FA 600', slug: 'filtro-areia-fa-600', description: 'Filtro de areia de alta capacidade.', images: [], category: 'Painel', sku: 'FT-FA600', priceEur: 129.00, stock: 25, ref: 'REF010', specs: { capacidade: '600 L', 'diâmetro': '500 mm', material: 'Polipropileno' } },
+  { id: 'fp-11', name: 'Filtro Magnético FM 100', slug: 'filtro-magnetico-fm-100', description: 'Filtro magnético para proteção de equipamentos.', images: [], category: 'Painel', sku: 'FT-FM100', priceEur: 89.90, stock: 30, ref: 'REF011', specs: { 'diâmetro conexão': '1"', material: 'Latão niquelado' } },
+  { id: 'fp-12', name: 'Câmara de Decantação CD 2000', slug: 'camara-decantacao-cd-2000', description: 'Câmara de decantação de 2000L.', images: [], category: 'Painel', sku: 'FT-CD2000', priceEur: 0, ref: 'REF012', specs: { capacidade: '2000 L', material: 'PEAD' } },
+  { id: 'fp-13', name: 'Tubo PVC 110mm (3 metros)', slug: 'tubo-pvc-110mm-3m', description: 'Tubo PVC para instalações.', images: [], category: 'Proteção', sku: 'AC-PVC110', priceEur: 12.90, stock: 100, ref: 'REF013', specs: { diâmetro: '110 mm', comprimento: '3 m', material: 'PVC' } },
+  { id: 'fp-14', name: 'Kit Uniões Flexíveis KUF 6pcs', slug: 'kit-unioes-flexiveis-kuf-6pcs', description: 'Kit de uniões flexíveis.', images: [], category: 'Proteção', sku: 'AC-KUF6', priceEur: 24.90, stock: 50, ref: 'REF014', specs: { quantidade: '6 peças', 'diâmetro': '1" 1/4' } },
+  { id: 'fp-15', name: 'Cabo Elétrico Submersível 50m', slug: 'cabo-eletrico-submersivel-50m', description: 'Cabo elétrico para uso submersível.', images: [], category: 'Proteção', sku: 'AC-CES50', priceEur: 0, ref: 'REF015', specs: { comprimento: '50 m', secção: '3x2.5 mm²' } },
+  { id: 'fp-16', name: 'Kit Solar porta KS-SOLAR 300', slug: 'kit-solar-ks-solar-300', description: 'Kit solar para portas.', images: [], category: 'Revestimentos Higiénicos', sku: 'SS-KSSOL300', priceEur: 2190.00, stock: 2, ref: 'REF016', specs: { 'potência painel': '300 W', 'caudal máx.': '120 L/min', 'altura máx.': '30 m' } },
+  { id: 'fp-17', name: 'Porta Seccionada para portas ISB 1000', slug: 'porta-seccionada-isb-1000', description: 'Porta seccionada industrial.', images: [], category: 'Revestimentos Higiénicos', sku: 'SS-ISB1000', priceEur: 0, ref: 'REF017', specs: { potência: '1.1 kW', 'tensão entrada': '100-500 V DC' } },
+  { id: 'fp-18', name: 'Porta de Porta Rápida ECO 1.5 CV', slug: 'porta-rapida-eco-15-cv', description: 'Porta rápida ECO.', images: [], category: 'Portas', sku: 'PC-ECO15', priceEur: 349.00, stock: 10, ref: 'REF018', specs: { potência: '1.5 CV', 'caudal máx.': '160 L/min', compatível: 'Água salgada' } },
+  { id: 'fp-19', name: 'Filtro de Porta Rápida FP 800', slug: 'filtro-porta-rapida-fp-800', description: 'Filtro para porta rápida.', images: [], category: 'Portas', sku: 'PC-FP800', priceEur: 0, ref: 'REF019', specs: { capacidade: '800 L', 'diâmetro': '600 mm' } },
 ];
 
 function formatPrice(priceEur: number): string {
@@ -238,7 +238,7 @@ export function ProductListingPage() {
       const matchesSearch =
         search.trim() === '' ||
         p.name.toLowerCase().includes(search.toLowerCase()) ||
-        p.sku.toLowerCase().includes(search.toLowerCase()) ||
+        (p.sku ?? '').toLowerCase().includes(search.toLowerCase()) ||
         p.category.toLowerCase().includes(search.toLowerCase());
       const matchesCategory =
         activeCategory === 'Todos' || p.category === activeCategory;
