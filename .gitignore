@@ -1,1 +1,10 @@
-node_modules\n.next\n.env\n*.log\ndownload/\nskills/\nupload/\ntmp/\n
+node_modules
+.next
+.env
+*.log
+download/
+skills/
+upload/
+tmp/
+__pycache__/
+.DS_Store
