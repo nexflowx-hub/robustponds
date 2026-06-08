@@ -140,6 +140,7 @@ export function CartPage() {
                       <Button
                         variant="ghost"
                         size="icon-sm"
+                        className="min-h-[44px] min-w-[44px]"
                         onClick={() =>
                           updateQuantity(item.product.id, item.quantity - 1)
                         }
@@ -152,6 +153,7 @@ export function CartPage() {
                       <Button
                         variant="ghost"
                         size="icon-sm"
+                        className="min-h-[44px] min-w-[44px]"
                         onClick={() =>
                           updateQuantity(item.product.id, item.quantity + 1)
                         }
@@ -169,7 +171,7 @@ export function CartPage() {
                     <Button
                       variant="ghost"
                       size="icon-sm"
-                      className="text-destructive hover:text-destructive"
+                      className="text-destructive hover:text-destructive min-h-[44px] min-w-[44px]"
                       onClick={() => removeItem(item.product.id)}
                     >
                       <Trash2 className="size-4" />

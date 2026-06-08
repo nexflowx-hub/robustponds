@@ -165,7 +165,6 @@ export async function createCheckoutIntent(
       method: payload.method,
       amount: payload.amount,
       customer: payload.customer,
-      items: payload.items,
     }),
   });
 }

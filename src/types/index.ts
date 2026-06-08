@@ -43,7 +43,7 @@ export type PageView =
 
 // ── Robustponds Categories (matching original site) ──
 export const CATEGORIES = [
-  'All',
+  'Todos',
   'Complementos',
   'Cortina de Lamelas',
   'Painel',
@@ -57,18 +57,19 @@ export type Category = (typeof CATEGORIES)[number];
 // ── Payment Methods (Atlas Core API v2.0) ──
 export type PaymentMethod = 'card' | 'multibanco' | 'mbway' | 'crypto';
 
-// ── Checkout Payload (Atlas Core OpenAPI 2.0) ──
+// ── Checkout Payload (Atlas Core OpenAPI 3.0 - /checkout/intent) ──
+// Required: store, method, amount, customer
+// Method enum: card, multibanco, mbway, crypto
+// Customer: email, nif (obrigatório para crypto), birthDate (obrigatório para crypto)
 export interface CheckoutPayload {
   store: string;
   method: PaymentMethod;
   amount: number;
   customer: {
     email: string;
-    name: string;
     nif?: string;       // Obrigatório para crypto (KYC)
     birthDate?: string;  // Obrigatório para crypto (AML) - format date
   };
-  items?: { productId: string; name: string; quantity: number; unitPrice: number }[];
 }
 
 export interface CheckoutResponse {

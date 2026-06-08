@@ -82,7 +82,7 @@ export default function Navbar() {
 
   const isActive = (page: string) => currentPage === page;
 
-  const filteredCategories = CATEGORIES.filter((c) => c !== 'All');
+  const filteredCategories = CATEGORIES.filter((c) => c !== 'Todos');
 
   return (
     <header className="w-full">

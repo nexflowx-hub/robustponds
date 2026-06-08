@@ -75,8 +75,8 @@ const paymentMethods: Array<{
 ];
 
 const checkoutSchema = z.object({
-  customerName: z.string().min(2, 'Nome é obrigatório (mín. 2 caracteres)'),
   customerEmail: z.string().email('Email inválido'),
+  customerName: z.string().min(2, 'Nome é obrigatório (mín. 2 caracteres)'),
   customerPhone: z.string().optional(),
   customerCompany: z.string().optional(),
   customerNif: z.string().optional(),
@@ -120,21 +120,16 @@ export function CheckoutPage() {
 
     setSubmitting(true);
     try {
+      // Atlas Core OpenAPI 3.0 — POST /checkout/intent
+      // Required: store, method, amount, customer { email, nif?, birthDate? }
       const payload = {
-        store: 'robustponds-shop',
         method: selectedMethod,
         amount: total,
         customer: {
           email: data.customerEmail,
-          name: data.customerName,
           nif: data.customerNif || undefined,
           birthDate: data.birthDate || undefined,
         },
-        cart: items.map((item) => ({
-          productId: item.product.id,
-          quantity: item.quantity,
-          priceEur: item.product.priceEur,
-        })),
       };
 
       const res = await fetch('/api/checkout', {

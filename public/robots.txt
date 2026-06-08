@@ -1,8 +1,12 @@
 # Robots.txt for robustponds.shop
-# Allow all crawlers to index the site
+# B2B E-commerce - Equipamentos Frigoríficos Industriais
 
 User-agent: *
 Allow: /
+Disallow: /api/
+
+# Crawl-delay (optional, respected by some bots)
+Crawl-delay: 1
 
 # Sitemap
 Sitemap: https://robustponds.shop/sitemap.xml

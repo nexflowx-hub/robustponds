@@ -8,24 +8,12 @@ import {
   ShoppingCart,
   FileText,
   X,
-  Send,
-  Loader2,
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-} from '@/components/ui/dialog';
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -36,162 +24,17 @@ import {
 } from '@/components/ui/breadcrumb';
 import { useNavigationStore } from '@/store/navigation';
 import { useCartStore } from '@/store/cart';
+import { QuoteModal } from '@/components/shared/QuoteModal';
+import { FALLBACK_PRODUCTS } from '@/lib/fallback-products';
 import type { Product } from '@/types';
 import { CATEGORIES } from '@/types';
 import { toast } from 'sonner';
-
-// ── Fallback Products ──
-const FALLBACK_PRODUCTS: Product[] = [
-  { id: 'fp-1', name: 'Porta Frigorífica KS 100-1', slug: 'porta-frigorifica-ks-100-1', description: 'Porta frigorífica de alto rendimento.', images: [], category: 'Portas', sku: 'BS-KS100-1', priceEur: 289.90, stock: 15, ref: 'REF001', specs: { potência: '1 CV', 'caudal máx.': '100 L/min', 'altura máx.': '10 m' } },
-  { id: 'fp-2', name: 'Porta Frigorífica KS 200-2', slug: 'porta-frigorifica-ks-200-2', description: 'Porta frigorífica industrial modelo 200.', images: [], category: 'Portas', sku: 'BS-KS200-2', priceEur: 449.00, stock: 8, ref: 'REF002', specs: { potência: '2 CV', 'caudal máx.': '200 L/min', 'altura máx.': '15 m' } },
-  { id: 'fp-3', name: 'Porta Frigorífica Industrial IP 55', slug: 'porta-frigorifica-industrial-ip-55', description: 'Porta frigorífica industrial IP 55.', images: [], category: 'Portas', sku: 'BS-IP55', priceEur: 0, ref: 'REF003', specs: { potência: '5 CV', 'caudal máx.': '500 L/min', 'altura máx.': '25 m' } },
-  { id: 'fp-4', name: 'Complemento Industrial Centrífuga JP 50', slug: 'complemento-industrial-centrifuga-jp-50', description: 'Complemento centrífugo para câmaras frias.', images: [], category: 'Complementos', sku: 'BP-JP50', priceEur: 179.90, stock: 20, ref: 'REF004', specs: { potência: '0.75 CV', 'caudal máx.': '50 L/min', 'altura máx.': '8 m' } },
-  { id: 'fp-5', name: 'Complemento Industrial Autoaspirante AS 80', slug: 'complemento-industrial-autoaspirante-as-80', description: 'Complemento autoaspirante industrial.', images: [], category: 'Complementos', sku: 'BP-AS80', priceEur: 259.00, stock: 12, ref: 'REF005', specs: { potência: '1 CV', 'caudal máx.': '80 L/min', 'altura máx.': '12 m' } },
-  { id: 'fp-6', name: 'Complemento Industrial Multi-Etapa ME 100', slug: 'complemento-industrial-multi-etapa-me-100', description: 'Complemento multi-etapa para pressão elevada.', images: [], category: 'Complementos', sku: 'BP-ME100', priceEur: 0, ref: 'REF006', specs: { potência: '1.5 CV', 'caudal máx.': '100 L/min', 'altura máx.': '20 m' } },
-  { id: 'fp-7', name: 'Grupo Pressurizador GP 60-24', slug: 'grupo-pressurizador-gp-60-24', description: 'Grupo pressurizador compacto.', images: [], category: 'Cortina de Lamelas', sku: 'SP-GP6024', priceEur: 899.00, stock: 5, ref: 'REF007', specs: { potência: '2 CV', 'vaso expansão': '24 L', pressão: '2-6 bar' } },
-  { id: 'fp-8', name: 'Cortina de Lamelas Residencial RP 200', slug: 'cortina-lamelas-residencial-rp-200', description: 'Cortina de lamelas para uso residencial.', images: [], category: 'Cortina de Lamelas', sku: 'SP-RP200', priceEur: 1250.00, stock: 3, ref: 'REF008', specs: { potência: '3 CV', 'vaso expansão': '60 L', pressão: '2-8 bar' } },
-  { id: 'fp-9', name: 'Cortina de Lamelas Comercial CP 500', slug: 'cortina-lamelas-comercial-cp-500', description: 'Cortina de lamelas para uso comercial.', images: [], category: 'Cortina de Lamelas', sku: 'SP-CP500', priceEur: 0, ref: 'REF009', specs: { potência: '7.5 CV', 'vaso expansão': '200 L', pressão: '3-10 bar' } },
-  { id: 'fp-10', name: 'Filtro de Areia FA 600', slug: 'filtro-areia-fa-600', description: 'Filtro de areia de alta capacidade.', images: [], category: 'Painel', sku: 'FT-FA600', priceEur: 129.00, stock: 25, ref: 'REF010', specs: { capacidade: '600 L', 'diâmetro': '500 mm', material: 'Polipropileno' } },
-  { id: 'fp-11', name: 'Filtro Magnético FM 100', slug: 'filtro-magnetico-fm-100', description: 'Filtro magnético para proteção de equipamentos.', images: [], category: 'Painel', sku: 'FT-FM100', priceEur: 89.90, stock: 30, ref: 'REF011', specs: { 'diâmetro conexão': '1"', material: 'Latão niquelado' } },
-  { id: 'fp-12', name: 'Câmara de Decantação CD 2000', slug: 'camara-decantacao-cd-2000', description: 'Câmara de decantação de 2000L.', images: [], category: 'Painel', sku: 'FT-CD2000', priceEur: 0, ref: 'REF012', specs: { capacidade: '2000 L', material: 'PEAD' } },
-  { id: 'fp-13', name: 'Tubo PVC 110mm (3 metros)', slug: 'tubo-pvc-110mm-3m', description: 'Tubo PVC para instalações.', images: [], category: 'Proteção', sku: 'AC-PVC110', priceEur: 12.90, stock: 100, ref: 'REF013', specs: { diâmetro: '110 mm', comprimento: '3 m', material: 'PVC' } },
-  { id: 'fp-14', name: 'Kit Uniões Flexíveis KUF 6pcs', slug: 'kit-unioes-flexiveis-kuf-6pcs', description: 'Kit de uniões flexíveis.', images: [], category: 'Proteção', sku: 'AC-KUF6', priceEur: 24.90, stock: 50, ref: 'REF014', specs: { quantidade: '6 peças', 'diâmetro': '1" 1/4' } },
-  { id: 'fp-15', name: 'Cabo Elétrico Submersível 50m', slug: 'cabo-eletrico-submersivel-50m', description: 'Cabo elétrico para uso submersível.', images: [], category: 'Proteção', sku: 'AC-CES50', priceEur: 0, ref: 'REF015', specs: { comprimento: '50 m', secção: '3x2.5 mm²' } },
-  { id: 'fp-16', name: 'Kit Solar porta KS-SOLAR 300', slug: 'kit-solar-ks-solar-300', description: 'Kit solar para portas.', images: [], category: 'Revestimentos Higiénicos', sku: 'SS-KSSOL300', priceEur: 2190.00, stock: 2, ref: 'REF016', specs: { 'potência painel': '300 W', 'caudal máx.': '120 L/min', 'altura máx.': '30 m' } },
-  { id: 'fp-17', name: 'Porta Seccionada para portas ISB 1000', slug: 'porta-seccionada-isb-1000', description: 'Porta seccionada industrial.', images: [], category: 'Revestimentos Higiénicos', sku: 'SS-ISB1000', priceEur: 0, ref: 'REF017', specs: { potência: '1.1 kW', 'tensão entrada': '100-500 V DC' } },
-  { id: 'fp-18', name: 'Porta de Porta Rápida ECO 1.5 CV', slug: 'porta-rapida-eco-15-cv', description: 'Porta rápida ECO.', images: [], category: 'Portas', sku: 'PC-ECO15', priceEur: 349.00, stock: 10, ref: 'REF018', specs: { potência: '1.5 CV', 'caudal máx.': '160 L/min', compatível: 'Água salgada' } },
-  { id: 'fp-19', name: 'Filtro de Porta Rápida FP 800', slug: 'filtro-porta-rapida-fp-800', description: 'Filtro para porta rápida.', images: [], category: 'Portas', sku: 'PC-FP800', priceEur: 0, ref: 'REF019', specs: { capacidade: '800 L', 'diâmetro': '600 mm' } },
-];
 
 function formatPrice(priceEur: number): string {
   return new Intl.NumberFormat('pt-PT', {
     style: 'currency',
     currency: 'EUR',
   }).format(priceEur);
-}
-
-// ── Quote Modal ──
-function QuoteModal({
-  open,
-  onOpenChange,
-  product,
-}: {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  product: Product;
-}) {
-  const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: '',
-  });
-
-  const handleSubmit = async () => {
-    if (!formData.name || !formData.email) {
-      toast.error('Preencha o nome e email obrigatórios.');
-      return;
-    }
-    setLoading(true);
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...formData,
-          subject: `Pedido de Orçamento - ${product.name}`,
-          product: product.name,
-          sku: product.sku,
-        }),
-      });
-      if (res.ok) {
-        toast.success('Pedido de orçamento enviado com sucesso!');
-        onOpenChange(false);
-        setFormData({ name: '', email: '', phone: '', company: '', message: '' });
-      } else {
-        toast.error('Erro ao enviar pedido. Tente novamente.');
-      }
-    } catch {
-      toast.error('Erro de ligação. Tente novamente.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-lg">
-        <DialogHeader>
-          <DialogTitle>Pedir Orçamento</DialogTitle>
-          <DialogDescription>
-            Produto: <span className="font-medium text-foreground">{product.name}</span> ({product.sku})
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-2">
-          <div className="grid gap-2">
-            <Label htmlFor="quote-name">Nome *</Label>
-            <Input
-              id="quote-name"
-              value={formData.name}
-              onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
-              placeholder="Seu nome"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="quote-email">Email *</Label>
-            <Input
-              id="quote-email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
-              placeholder="email@exemplo.pt"
-            />
-          </div>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="quote-phone">Telefone</Label>
-              <Input
-                id="quote-phone"
-                value={formData.phone}
-                onChange={(e) => setFormData((f) => ({ ...f, phone: e.target.value }))}
-                placeholder="+351 ..."
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="quote-company">Empresa</Label>
-              <Input
-                id="quote-company"
-                value={formData.company}
-                onChange={(e) => setFormData((f) => ({ ...f, company: e.target.value }))}
-                placeholder="Nome da empresa"
-              />
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="quote-message">Mensagem</Label>
-            <Textarea
-              id="quote-message"
-              value={formData.message}
-              onChange={(e) => setFormData((f) => ({ ...f, message: e.target.value }))}
-              placeholder="Detalhes adicionais sobre o seu pedido..."
-              rows={3}
-            />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
-            Cancelar
-          </Button>
-          <Button onClick={handleSubmit} disabled={loading}>
-            {loading ? <Loader2 className="animate-spin" /> : <Send />}
-            Enviar Pedido
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-  );
 }
 
 // ── Product Card Skeleton ──
@@ -281,7 +124,7 @@ export function ProductListingPage() {
 
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold md:text-3xl">Produtos</h1>
+        <h1 className="text-2xl font-bold md:text-3xl lg:text-4xl">Produtos</h1>
         <p className="mt-1 text-muted-foreground">
           {isLoading
             ? 'A carregar produtos...'
@@ -306,6 +149,7 @@ export function ProductListingPage() {
                 <button
                   onClick={() => setSearch('')}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  aria-label="Limpar pesquisa"
                 >
                   <X className="size-4" />
                 </button>
@@ -313,7 +157,7 @@ export function ProductListingPage() {
             </div>
 
             {/* Category Filters */}
-            <nav className="space-y-1">
+            <nav className="space-y-1" aria-label="Filtro de categorias">
               <p className="px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Categorias
               </p>
@@ -326,6 +170,7 @@ export function ProductListingPage() {
                       ? 'bg-primary text-primary-foreground'
                       : 'text-foreground hover:bg-muted'
                   }`}
+                  aria-current={activeCategory === cat ? 'true' : undefined}
                 >
                   <span>{cat}</span>
                   {activeCategory === cat && (
@@ -353,17 +198,20 @@ export function ProductListingPage() {
                 <button
                   onClick={() => setSearch('')}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  aria-label="Limpar pesquisa"
                 >
                   <X className="size-4" />
                 </button>
               )}
             </div>
-            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide" role="tablist" aria-label="Categorias de produtos">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`shrink-0 rounded-full px-4 py-1.5 text-xs font-medium transition-colors ${
+                  role="tab"
+                  aria-selected={activeCategory === cat}
+                  className={`shrink-0 rounded-full px-4 py-2 text-xs font-medium transition-colors min-h-[44px] flex items-center ${
                     activeCategory === cat
                       ? 'bg-primary text-primary-foreground'
                       : 'border border-border bg-background text-foreground hover:bg-muted'
@@ -377,21 +225,21 @@ export function ProductListingPage() {
 
           {/* ── Product Grid ── */}
           {isLoading ? (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => (
                 <ProductCardSkeleton key={i} />
               ))}
             </div>
           ) : filteredProducts.length === 0 ? (
-            <Card className="flex flex-col items-center justify-center py-16">
+            <Card className="flex flex-col items-center justify-center py-16 px-6">
               <Package className="mb-4 size-16 text-muted-foreground/40" />
               <h3 className="text-lg font-semibold">Nenhum produto encontrado</h3>
-              <p className="mt-1 text-sm text-muted-foreground">
+              <p className="mt-1 text-sm text-muted-foreground text-center max-w-sm">
                 Tente alterar os filtros ou termos de pesquisa.
               </p>
               <Button
                 variant="outline"
-                className="mt-4"
+                className="mt-4 min-h-[44px]"
                 onClick={() => {
                   setSearch('');
                   setActiveCategory('Todos');
@@ -401,7 +249,7 @@ export function ProductListingPage() {
               </Button>
             </Card>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
               {filteredProducts.map((product) => (
                 <Card
                   key={product.id}
@@ -453,7 +301,7 @@ export function ProductListingPage() {
                       <Button
                         variant="outline"
                         size="sm"
-                        className="w-full"
+                        className="w-full min-h-[44px]"
                         onClick={(e) => handleQuoteRequest(e, product)}
                       >
                         <FileText />
@@ -462,7 +310,7 @@ export function ProductListingPage() {
                     ) : (
                       <Button
                         size="sm"
-                        className="w-full"
+                        className="w-full min-h-[44px]"
                         onClick={(e) => handleAddToCart(e, product)}
                       >
                         <ShoppingCart />

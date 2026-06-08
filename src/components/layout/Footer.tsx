@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { MapPin, Phone, Mail } from 'lucide-react';
 import { useNavigationStore } from '@/store/navigation';
 import { CATEGORIES } from '@/types';
@@ -24,9 +25,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Col 1: ROBUSTPONDS® */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <h3 className="text-xl font-bold tracking-wide mb-4">
-              ROBUSTPONDS<span className="text-[#C52023]">®</span>
-            </h3>
+            <Image
+              src="/logo-robustponds.png"
+              alt="Robustponds® - Equipamentos Frigoríficos Industriais"
+              width={160}
+              height={74}
+              className="h-14 w-auto mb-4 brightness-0 invert"
+              priority
+            />
             <p className="text-sm text-gray-400 leading-relaxed mb-6 max-w-xs">
               Especialistas em equipamentos frigoríficos industriais e
               comercialização de produtos para câmaras frias, portas
@@ -56,7 +62,7 @@ export default function Footer() {
               Produtos
             </h4>
             <ul className="flex flex-col gap-2.5">
-              {CATEGORIES.filter((c) => c !== 'All').map((cat) => (
+              {CATEGORIES.filter((c) => c !== 'Todos').map((cat) => (
                 <li key={cat}>
                   <button
                     onClick={() => navigate('produtos')}
