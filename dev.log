@@ -1,0 +1,34 @@
+$ next dev
+▲ Next.js 16.2.7 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://21.0.10.185:3000
+- Environments: .env
+✓ Ready in 267ms
+
+ GET / 200 in 475ms (next.js: 129ms, application-code: 346ms)
+ GET / 200 in 73ms (next.js: 5ms, application-code: 68ms)
+[browser] Uncaught TypeError: Cannot read properties of null (reading 'name')
+    at QuoteModal (src/components/shared/QuoteModal.tsx:73:77)
+    at ProductListingPage (src/components/pages/ProductListingPage.tsx:329:7)
+    at AppShell (src/app/page.tsx:105:40)
+    at Home (src/app/page.tsx:62:7)
+  71 |           <DialogTitle>Pedir Orçamento</DialogTitle>
+  72 |           <DialogDescription>
+> 73 |             Produto: <span className="font-medium text-foreground">{product.name}</span>
+     |                                                                             ^
+  74 |             {product.sku && <span className="text-muted-foreground"> ({product.sku})</span>}
+  75 |           </DialogDescription>
+  76 |         </DialogHeader>
+⚠ Fast Refresh had to perform a full reload due to a runtime error.
+✓ Compiled in 51ms
+ GET / 200 in 61ms (next.js: 6ms, application-code: 55ms)
+ GET / 200 in 55ms (next.js: 3ms, application-code: 52ms)
+ GET /api/bootstrap 200 in 1066ms (next.js: 309ms, application-code: 757ms)
+ GET /api/bootstrap 200 in 745ms (next.js: 2ms, application-code: 743ms)
+ GET / 200 in 70ms (next.js: 3ms, application-code: 66ms)
+[browser] Image with src "https://i0.wp.com/robustponds.pt/wp-content/uploads/2018/11/Camara7-logo.jpg?fit=1920%2C809" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[browser] Image with src "https://i0.wp.com/robustponds.pt/wp-content/uploads/2018/11/foto1b-logo.jpg?fit=1920%2C800" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+⨯ upstream image response failed for https://robustponds.pt/wp-content/uploads/2018/11/Porta-r%C3%A1pida-500x359.jpg 404
+ GET / 200 in 53ms (next.js: 2ms, application-code: 51ms)
