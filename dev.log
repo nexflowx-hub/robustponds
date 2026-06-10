@@ -32,3 +32,27 @@ Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
 Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
 ⨯ upstream image response failed for https://robustponds.pt/wp-content/uploads/2018/11/Porta-r%C3%A1pida-500x359.jpg 404
  GET / 200 in 53ms (next.js: 2ms, application-code: 51ms)
+ GET / 200 in 51ms (next.js: 3ms, application-code: 48ms)
+[browser] Image with src "https://i0.wp.com/robustponds.pt/wp-content/uploads/2022/08/porta-hospital-robustponds.png?fit=2000%2C1200" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET / 200 in 53ms (next.js: 3ms, application-code: 51ms)
+ GET /api/bootstrap 200 in 707ms (next.js: 3ms, application-code: 704ms)
+✓ Compiled in 190ms
+ GET / 200 in 98ms (next.js: 61ms, application-code: 37ms)
+ GET / 200 in 21ms (next.js: 2ms, application-code: 18ms)
+ GET / 200 in 19ms (next.js: 2ms, application-code: 17ms)
+⚠ Blocked cross-origin request to Next.js dev resource /__nextjs_font/geist-latin.woff2 from "preview-chat-44cecaca-bdf2-4dfb-805b-b3708817dff1.space-z.ai".
+Cross-origin access to Next.js dev resources is blocked by default for safety.
+
+To allow this host in development, add it to "allowedDevOrigins" in next.config.js and restart the dev server:
+
+// next.config.js
+module.exports = {
+  allowedDevOrigins: ['preview-chat-44cecaca-bdf2-4dfb-805b-b3708817dff1.space-z.ai'],
+}
+
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+✓ Compiled in 52ms
+ GET / 200 in 251ms (next.js: 5ms, application-code: 246ms)
+ GET / 200 in 64ms (next.js: 3ms, application-code: 61ms)
+ GET / 200 in 59ms (next.js: 2ms, application-code: 57ms)
