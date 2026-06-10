@@ -121,11 +121,14 @@ export default function RootLayout({
               email: "orcamentos@robustponds.pt",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Zona Industrial, Apartado 123",
-                addressLocality: "Torres Vedras",
-                postalCode: "2560-000",
+                streetAddress: "Rua De São Nuno, Nr. 92",
+                addressLocality: "São Pedro da Cadeira",
+                addressRegion: "Torres Vedras",
+                postalCode: "2560-195",
                 addressCountry: "PT",
               },
+              taxID: "514889667",
+              legalName: "ROBUSTPONDS, LDA",
               sameAs: [],
               areaServed: {
                 "@type": "Country",

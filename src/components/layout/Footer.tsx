@@ -54,14 +54,14 @@ export default function Footer() {
               <div className="flex items-start gap-2 text-xs text-gray-400">
                 <Shield className="size-3.5 flex-shrink-0 text-[#C52023] mt-0.5" />
                 <div>
-                  <span className="font-semibold text-gray-300">ROBUSTPONDS - COMÉRCIO DE EQUIPAMENTOS, LDA.</span>
+                  <span className="font-semibold text-gray-300">ROBUSTPONDS, LDA</span>
                 </div>
               </div>
               <div className="text-xs text-gray-500 pl-5.5 space-y-1">
-                <p><span className="text-gray-400 font-medium">NIF:</span> 516 123 456</p>
-                <p><span className="text-gray-400 font-medium">Capital Social:</span> €5.000,00</p>
-                <p><span className="text-gray-400 font-medium">Matriculada na CRC:</span> Torres Vedras</p>
-                <p><span className="text-gray-400 font-medium">NIPC:</span> 516 123 456</p>
+                <p><span className="text-gray-400 font-medium">NIF/NIPC:</span> 514 889 667</p>
+                <p><span className="text-gray-400 font-medium">Forma Jurídica:</span> Soc. Por Quotas</p>
+                <p><span className="text-gray-400 font-medium">Concelho:</span> Torres Vedras</p>
+                <p><span className="text-gray-400 font-medium">Distrito:</span> Lisboa</p>
               </div>
             </div>
 
@@ -84,8 +84,8 @@ export default function Footer() {
               <div className="flex items-start gap-2.5 text-sm text-gray-300">
                 <MapPin className="size-4 flex-shrink-0 text-[#C52023] mt-0.5" />
                 <span className="text-gray-400">
-                  Zona Industrial, Apartado 123<br />
-                  2560-000 Torres Vedras, Portugal
+                  Rua De São Nuno, Nr. 92<br />
+                  2560-195 São Pedro da Cadeira, Portugal
                 </span>
               </div>
             </div>
