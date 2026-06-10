@@ -8,3 +8,9 @@ upload/
 tmp/
 __pycache__/
 .DS_Store
+mini-services/
+db/
+db.sqlite
+bun.lock
+package-lock.json
+tsconfig.tsbuildinfo

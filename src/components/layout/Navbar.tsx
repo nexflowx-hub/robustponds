@@ -75,8 +75,8 @@ export default function Navbar() {
     setMobileOpen(false);
   };
 
-  const handleCategoryClick = () => {
-    navigate('produtos');
+  const handleCategoryClick = (category: string) => {
+    navigate('produtos', category);
     setMobileOpen(false);
   };
 
@@ -163,7 +163,7 @@ export default function Navbar() {
                         {filteredCategories.map((cat) => (
                           <button
                             key={cat}
-                            onClick={() => handleCategoryClick()}
+                            onClick={() => handleCategoryClick(cat)}
                             className="w-full text-left px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-[#C52023] transition-colors"
                           >
                             {cat}
@@ -266,7 +266,7 @@ export default function Navbar() {
                         {filteredCategories.map((cat) => (
                           <button
                             key={cat}
-                            onClick={() => handleCategoryClick()}
+                            onClick={() => handleCategoryClick(cat)}
                             className="w-full text-left px-4 py-2.5 text-sm text-gray-600 hover:text-[#C52023] hover:bg-gray-50 rounded-lg transition-colors"
                           >
                             {cat}

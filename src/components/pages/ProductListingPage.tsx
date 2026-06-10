@@ -54,10 +54,10 @@ function ProductCardSkeleton() {
 
 // ── Main Component ──
 export function ProductListingPage() {
-  const { navigate, setSelectedProduct } = useNavigationStore();
+  const { navigate, setSelectedProduct, selectedCategory } = useNavigationStore();
   const { addItem } = useCartStore();
   const [search, setSearch] = useState('');
-  const [activeCategory, setActiveCategory] = useState<string>('Todos');
+  const [activeCategory, setActiveCategory] = useState<string>(selectedCategory ?? 'Todos');
   const [quoteModalProduct, setQuoteModalProduct] = useState<Product | null>(null);
 
   const { data: products, isLoading } = useQuery<Product[]>({
@@ -326,13 +326,15 @@ export function ProductListingPage() {
       </div>
 
       {/* Quote Modal */}
-      <QuoteModal
-        open={!!quoteModalProduct}
-        onOpenChange={(open) => {
-          if (!open) setQuoteModalProduct(null);
-        }}
-        product={quoteModalProduct!}
-      />
+      {quoteModalProduct && (
+        <QuoteModal
+          open={!!quoteModalProduct}
+          onOpenChange={(open) => {
+            if (!open) setQuoteModalProduct(null);
+          }}
+          product={quoteModalProduct}
+        />
+      )}
     </div>
   );
 }

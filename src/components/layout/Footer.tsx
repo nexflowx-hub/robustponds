@@ -18,6 +18,10 @@ const INFO_LINKS = [
 export default function Footer() {
   const navigate = useNavigationStore((s) => s.navigate);
 
+  const handleCategoryClick = (category: string) => {
+    navigate('produtos', category);
+  };
+
   return (
     <footer className="bg-[#2C2C2C] text-white">
       {/* ── Main footer grid ── */}
@@ -65,7 +69,7 @@ export default function Footer() {
               {CATEGORIES.filter((c) => c !== 'Todos').map((cat) => (
                 <li key={cat}>
                   <button
-                    onClick={() => navigate('produtos')}
+                    onClick={() => handleCategoryClick(cat)}
                     className="text-sm text-gray-400 hover:text-white hover:pl-1 transition-all duration-200"
                   >
                     {cat}

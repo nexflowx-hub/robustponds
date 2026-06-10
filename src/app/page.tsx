@@ -65,7 +65,7 @@ export default function Home() {
 }
 
 function AppShell() {
-  const { currentPage, selectedProduct } = useNavigationStore();
+  const { currentPage, selectedProduct, selectedCategory } = useNavigationStore();
 
   // Dynamic document title + meta description for SPA navigation
   useEffect(() => {
@@ -102,7 +102,7 @@ function AppShell() {
       <Navbar />
       <div className="flex-1">
         {currentPage === 'home' && <HomePage />}
-        {currentPage === 'produtos' && <ProductListingPage />}
+        {currentPage === 'produtos' && <ProductListingPage key={selectedCategory ?? 'all'} />}
         {currentPage === 'produto' && <ProductDetailPage />}
         {currentPage === 'carrinho' && <CartPage />}
         {currentPage === 'checkout' && <CheckoutPage />}

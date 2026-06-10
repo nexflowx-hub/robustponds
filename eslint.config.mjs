@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Project-specific ignores:
+    "skills/**",
+    "mini-services/**",
+    "db/**",
+    "node_modules/**",
   ]),
 ]);
 

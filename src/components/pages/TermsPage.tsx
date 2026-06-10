@@ -181,13 +181,11 @@ export function TermsPage() {
               </div>
 
               <div className="rounded-lg border p-4">
-                <h3 className="font-semibold">4.4 Criptomoedas</h3>
+                <h3 className="font-semibold">4.4 Bizum</h3>
                 <p className="mt-1 text-muted-foreground">
-                  Aceitamos pagamentos em Bitcoin (BTC), Ethereum (ETH) e Tether (USDT). Devido a
-                  requisitos regulatórios KYC/AML, o cliente deverá fornecer o NIF e data de
-                  nascimento. Após a confirmação do pedido, será gerada uma morada de carteira
-                  cripto para o pagamento. O montante deve ser enviado no prazo indicado. O pedido
-                  é confirmado após verificação da transação na blockchain.
+                  Bizum é um serviço de pagamentos instantâneos disponível na Espanha. Após a confirmação
+                  do pedido, o cliente receberá uma notificação na aplicação Bizum para confirmar o pagamento.
+                  O pagamento é instantâneo e seguro.
                 </p>
               </div>
             </div>

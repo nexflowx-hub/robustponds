@@ -7,16 +7,16 @@ const STORE_ID =
 
 /**
  * POST /api/checkout
- * Creates a checkout intent via Atlas Core.
+ * Creates a checkout intent via Atlas Core Banking.
  *
- * Atlas Core OpenAPI 3.0 — POST /checkout/intent
+ * Atlas Core Banking — POST /checkout/intent
  * Required fields: store, method, amount, customer
- * Method enum: card, multibanco, mbway, crypto
- * Customer fields: email, nif (obrigatório para crypto), birthDate (obrigatório para crypto)
+ * Method enum: card, multibanco, mbway, bizum
+ * Customer fields: email (obrigatório)
  *
  * Expected body:
  * {
- *   method: "card" | "multibanco" | "mbway" | "crypto",
+ *   method: "card" | "multibanco" | "mbway" | "bizum",
  *   amount: number,
  *   customer: { email, nif?, birthDate? }
  * }
@@ -32,9 +32,10 @@ export async function POST(request: NextRequest) {
     };
 
     // ── Validation ──
-    if (!method || !["card", "multibanco", "mbway", "crypto"].includes(method)) {
+    const validMethods = ["card", "multibanco", "mbway", "bizum"];
+    if (!method || !validMethods.includes(method)) {
       return NextResponse.json(
-        { success: false, error: "Método de pagamento inválido" },
+        { success: false, error: `Método de pagamento inválido. Métodos aceites: ${validMethods.join(", ")}` },
         { status: 400 },
       );
     }
@@ -53,23 +54,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Crypto-specific validation (KYC/AML)
-    if (method === "crypto") {
-      if (!customer.nif) {
-        return NextResponse.json(
-          { success: false, error: "NIF é obrigatório para pagamentos com criptomoedas" },
-          { status: 400 },
-        );
-      }
-      if (!customer.birthDate) {
-        return NextResponse.json(
-          { success: false, error: "Data de nascimento é obrigatória para pagamentos com criptomoedas" },
-          { status: 400 },
-        );
-      }
-    }
-
-    // Build payload per Atlas Core OpenAPI 3.0 spec
+    // Build payload per Atlas Core Banking spec
     const payload: CheckoutPayload = {
       store: STORE_ID,
       method: method as CheckoutPayload["method"],
@@ -81,7 +66,7 @@ export async function POST(request: NextRequest) {
       },
     };
 
-    // Call Atlas Core
+    // Call Atlas Core Banking API
     const result = await createCheckoutIntent(payload);
 
     return NextResponse.json({
@@ -97,7 +82,7 @@ export async function POST(request: NextRequest) {
         error:
           error instanceof Error
             ? error.message
-            : "Erro ao processar o pagamento",
+            : "Erro ao processar o pagamento. Por favor, tente novamente.",
       },
       { status: 502 },
     );

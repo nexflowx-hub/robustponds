@@ -54,21 +54,21 @@ export const CATEGORIES = [
 
 export type Category = (typeof CATEGORIES)[number];
 
-// ── Payment Methods (Atlas Core API v2.0) ──
-export type PaymentMethod = 'card' | 'multibanco' | 'mbway' | 'crypto';
+// ── Payment Methods (Atlas Core Banking API) ──
+export type PaymentMethod = 'card' | 'multibanco' | 'mbway' | 'bizum';
 
-// ── Checkout Payload (Atlas Core OpenAPI 3.0 - /checkout/intent) ──
+// ── Checkout Payload (Atlas Core Banking - /checkout/intent) ──
 // Required: store, method, amount, customer
-// Method enum: card, multibanco, mbway, crypto
-// Customer: email, nif (obrigatório para crypto), birthDate (obrigatório para crypto)
+// Method enum: card, multibanco, mbway, bizum
+// Customer: email, phone (obrigatório para mbway/bizum)
 export interface CheckoutPayload {
   store: string;
   method: PaymentMethod;
   amount: number;
   customer: {
     email: string;
-    nif?: string;       // Obrigatório para crypto (KYC)
-    birthDate?: string;  // Obrigatório para crypto (AML) - format date
+    nif?: string;       // Opcional
+    birthDate?: string;  // Opcional
   };
 }
 
@@ -79,11 +79,11 @@ export interface CheckoutResponse {
     entity?: string;     // Multibanco
     reference?: string;  // Multibanco
     redirect?: string;
-    url?: string;        // Card redirect
+    url?: string;        // Card / Bizum redirect
     qr_code?: string;
     address?: string;
-    transaction_id?: string;  // MB WAY / Crypto
-    network?: string;         // Crypto
+    transaction_id?: string;  // MB WAY / Bizum
+    network?: string;         // Network info
   };
   message?: string;
 }
