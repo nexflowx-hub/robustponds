@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60" fill="none">
+  <rect width="120" height="60" rx="6" fill="#2B1A4E"/>
+  <text x="10" y="24" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#FFFFFF" letter-spacing="1">MB</text>
+  <text x="10" y="42" font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="700" fill="#A855F7" letter-spacing="1">WAY</text>
+  <circle cx="94" cy="30" r="18" fill="none" stroke="#A855F7" stroke-width="2.5" stroke-dasharray="6 3"/>
+  <text x="94" y="34" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="600" fill="#FFFFFF" text-anchor="middle">MOBILE</text>
+</svg>

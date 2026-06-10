@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 80" fill="none">
+  <!-- Book body -->
+  <rect x="4" y="6" width="56" height="66" rx="4" fill="#FFFFFF"/>
+  <rect x="6" y="8" width="52" height="62" rx="3" fill="#FFFFFF" stroke="#C52023" stroke-width="2"/>
+  <!-- Book spine -->
+  <rect x="4" y="6" width="8" height="66" rx="2" fill="#C52023"/>
+  <!-- Book pages (lines) -->
+  <line x1="20" y1="22" x2="52" y2="22" stroke="#C52023" stroke-width="1.5" opacity="0.4"/>
+  <line x1="20" y1="30" x2="48" y2="30" stroke="#C52023" stroke-width="1.5" opacity="0.4"/>
+  <line x1="20" y1="38" x2="52" y2="38" stroke="#C52023" stroke-width="1.5" opacity="0.4"/>
+  <line x1="20" y1="46" x2="44" y2="46" stroke="#C52023" stroke-width="1.5" opacity="0.4"/>
+  <!-- Pen -->
+  <line x1="46" y1="50" x2="56" y2="66" stroke="#333333" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="56" cy="68" r="2" fill="#C52023"/>
+  <!-- Text -->
+  <text x="68" y="28" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">Livro de</text>
+  <text x="68" y="44" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" fill="#FFFFFF" letter-spacing="0.5">Reclamações</text>
+  <text x="68" y="60" font-family="Arial,Helvetica,sans-serif" font-size="7.5" fill="#999999">www.livroreclamacoes.pt</text>
+</svg>
